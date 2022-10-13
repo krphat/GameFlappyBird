@@ -2,9 +2,9 @@
 #include "TextureManager.h"
 class Entity {
 public:
-	SDL_Rect getScrDimension();
+	SDL_Rect& getScrDimension();
 	void setScrDimension(int x, int y, int w, int h);
-	SDL_Rect getDesDimension();
+	SDL_Rect& getDesDimension();
 	void setDesDimension(int x, int y, int w, int h);
 	int getX();
 	void setX(int x);
@@ -17,6 +17,4 @@ private:
 	SDL_Rect scrDimension;
 	SDL_Rect desDimension;
 	SDL_Texture* tex;
-	int x;
-	int y;
 };
