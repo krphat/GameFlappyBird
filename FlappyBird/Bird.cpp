@@ -17,7 +17,6 @@ void Bird::Render(SDL_Renderer* ren) {
 	}
 }
 
-
 void Bird::Gravity() {
 	if (getJumpState()) {
 		jumpHeight = gravity + jumpHeight;
