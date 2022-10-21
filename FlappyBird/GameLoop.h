@@ -16,7 +16,7 @@ public:
 	void Update();
 	void Clean();
 private:
-	const int WIDTH_SCREEEN = 800;
+	const int WIDTH_SCREEN = 800;
 	const int HEIGHT_SCREEN = 640;
 	SDL_Window* window;
 	SDL_Renderer* renderer;
