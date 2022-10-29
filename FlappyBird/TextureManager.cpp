@@ -1,5 +1,5 @@
 #include "TextureManager.h"
-
+#include "Object.h"
 SDL_Texture* TextureManager::Texture(const char* filelocation,SDL_Renderer* ren)
 {
 	SDL_Surface* surface;
