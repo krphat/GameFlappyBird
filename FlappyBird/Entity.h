@@ -11,7 +11,7 @@ public:
 	void CreateTexture(const char* filelocation, SDL_Renderer* ren);
 	virtual void Render(SDL_Renderer* ren) = 0;
 
-	void SetBlendMode(SDL_BlendMode blending);
+
 	void SetAlpha(Uint8 alpha);
 private:
 	SDL_Rect scrDimension;

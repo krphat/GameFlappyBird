@@ -37,10 +37,7 @@ void Entity::CreateTexture(const char* filelocation, SDL_Renderer* ren)
 	Tex = TextureManager::Texture(filelocation, ren);
 }
 
-void Entity::SetBlendMode(SDL_BlendMode blending)
-{
-	SDL_SetTextureBlendMode(getTexture(), blending);
-}
+
 
 void Entity::SetAlpha(Uint8 alpha)
 {
