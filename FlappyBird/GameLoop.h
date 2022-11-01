@@ -4,6 +4,9 @@
 #include "SDL_image.h"
 #include "TextureManager.h"
 #include "Background.h"
+#include "Player.h" 
+#include "Pipes.h"
+#include "land.h"
 using namespace std;
 
 class GameLoop {

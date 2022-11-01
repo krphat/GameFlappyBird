@@ -8,9 +8,19 @@ GameLoop::GameLoop() {
 	renderer = NULL;
 //	gameState = false;
 	gameState =NULL;
+	//player set
 	p.setSource(0, 0, 37, 27);
 	p.setDest(20, 200, 37, 27);
-	setPipe();
+	//pipe set
+	pi1.setSource(0, 0, 65, 373);
+	pi1.setDest(40, -100, 65, 373);
+	pi2.setSource(0, 0, 65, 373);
+	pi2.setDest(40, 400, 65, 373);
+	pi3.setSource(0, 0, 65, 373);
+	pi3.setDest(350, -200, 65, 373);
+	pi4.setSource(0, 0, 65, 373);
+	pi4.setDest(350, 300, 65, 373);
+	// land set
 	land1.setSource(0, 0, 400, 130);
 	land1.setDest(0, 500, 400, 130);
 	land2.setSource(0, 0, 400, 130);
@@ -20,43 +30,9 @@ GameLoop::GameLoop() {
 bool GameLoop::getGameState() {
 	return gameState;
 }
-void GameLoop::setPipe()
-{
-	piTOP1.setSource(0, 0, WIDTH_PIPE, HEIGHT_PIPE);
-	piTOP1.setDest(xPipeDouble1, yPipeTop1, WIDTH_PIPE, HEIGHT_PIPE);
-	piUNDER1.setSource(0, 0, WIDTH_PIPE, HEIGHT_PIPE);
-	piUNDER1.setDest(xPipeDouble1, yPipeBottom1, WIDTH_PIPE, HEIGHT_PIPE);
-	piTOP2.setSource(0, 0, WIDTH_PIPE, HEIGHT_PIPE);
-	piTOP2.setDest(xPipeDouble2, yPipeTop2, WIDTH_PIPE, HEIGHT_PIPE);
-	piUNDER2.setSource(0, 0, WIDTH_PIPE, HEIGHT_PIPE);
-	piUNDER2.setDest(xPipeDouble2, yPipeBottom2, WIDTH_PIPE, HEIGHT_PIPE);
-}
 
-void GameLoop::MovePipe()
-{
-	xlocation1 -= 1;
-	
-	xlocation2 -= 1;
-	piTOP1.setSource(0, 0, WIDTH_PIPE, HEIGHT_PIPE);
-	piTOP1.setDest(xlocation1, yPipeTop1, WIDTH_PIPE, HEIGHT_PIPE);
-	piUNDER1.setSource(0, 0, WIDTH_PIPE, HEIGHT_PIPE);
-	piUNDER1.setDest(xlocation1, yPipeBottom1, WIDTH_PIPE, HEIGHT_PIPE);
-	piTOP2.setSource(0, 0, WIDTH_PIPE, HEIGHT_PIPE);
-	piTOP2.setDest(xlocation2, yPipeTop2, WIDTH_PIPE, HEIGHT_PIPE);
-	piUNDER2.setSource(0, 0, WIDTH_PIPE, HEIGHT_PIPE);
-	piUNDER2.setDest(xlocation2, yPipeBottom2, WIDTH_PIPE, HEIGHT_PIPE);
-	if (xlocation1 + WIDTH_PIPE <= 0)
-	{
-		xlocation1 = xlocation2+ WIDTH_PIPE +DISTANCE_2PIPE-50;
-		
-		
-	}
-	if (xlocation2 + WIDTH_PIPE <= 0)
-	{
-		xlocation2 = xlocation1 + WIDTH_PIPE + DISTANCE_2PIPE - 50;
-	}
-	
-}
+
+
 
 void GameLoop::Initialize() {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -66,14 +42,16 @@ void GameLoop::Initialize() {
 		if (renderer == NULL) {
 			cout << "Succeeded!" << endl;
 			gameState = true;
+			
 			b.CreateTexture("background.png", renderer);
 			p.CreateTexture("yellowbird-midflap2.png", renderer);
 			land1.CreateTexture("floor.png", renderer);
 			land2.CreateTexture("floor.png", renderer);
-			piTOP1.CreateTexture("pipe1.png", renderer);
-			piUNDER1.CreateTexture("pipe2.png", renderer);
-			piTOP2.CreateTexture("pipe1.png", renderer);
-			piUNDER2.CreateTexture("pipe2.png", renderer);
+			//pipe create
+			pi1.CreateTexture("pipe1.png",renderer);
+			pi2.CreateTexture("pipe2.png", renderer);
+			pi3.CreateTexture("pipe1.png", renderer);
+			pi4.CreateTexture("pipe2.png", renderer);
 
 		}
 		else {
@@ -90,27 +68,27 @@ void GameLoop::Event() {
 	if (exit.type == SDL_QUIT) {
 		gameState = false;
 	}
-	land1.Landmove1();
-	land2.setSource(0, 0, 400, 130);
-	land2.setDest(xlocation2, 500, 400, 130);
 
-	land2.Landmove2();
-	MovePipe();
 }
 
 void GameLoop::Update() {
-	//Source Dismension:
-	
-	//Destination Sismension:
+	pi1.MovePipe1();
+	pi2.MovePipe1();
+	pi3.MovePipe2();
+	pi4.MovePipe2();
+	land1.Landmove1();
+	land2.Landmove2();
 		
 }
 void GameLoop::Render() {
 	SDL_RenderClear(renderer);
 	b.Render(renderer);
-	piTOP1.Render(renderer);
-	piUNDER1.Render(renderer);
-	piTOP2.Render(renderer);
-	piUNDER2.Render(renderer);
+	//pipe render
+	pi1.Render(renderer);
+	pi2.Render(renderer);
+	pi3.Render(renderer);
+	pi4.Render(renderer);
+	//land render
 	land1.Render(renderer);
 	land2.Render(renderer);
 	p.Render(renderer);
